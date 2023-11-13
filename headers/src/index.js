@@ -14,7 +14,7 @@ const server = http.createServer((req,res)=>{
     // res.setHeader('Content-Type','application/json')
     // res.end(JSON.stringify(data))
     res.setHeader('Content-Type','text/html')
-    res.end('<h1>hello</h1>');
+    res.end('index');
 })
 
 server.listen(5000, () => {
