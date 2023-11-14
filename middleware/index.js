@@ -6,8 +6,10 @@ const port = 8000
 const data = JSON.parse(fs.readFileSync('data.json','utf-8'));
 const products = data.products;
 
-app.use(express.json())
-app.use(express.urlencoded())
+// innuilt middleware 
+app.use(express.json())  //parse body content
+app.use(express.urlencoded())  //parse url encoded content
+app.use(express.static('public'))
 
 // middleware 
 app.use((req,res,next)=>{
@@ -42,7 +44,8 @@ const auth = (req, res, next) => {
 
 
 // api endpoint
-app.get('/',auth,  (req, res) => {
+app.get('/products/:id',   (req, res) => {
+    console.log('>>>>>>>>>>>', req.params.id)
     res.json(products)})
 
 app.post('/',auth,(req,res)=>{
