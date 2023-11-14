@@ -44,9 +44,13 @@ const auth = (req, res, next) => {
 
 
 // api endpoint
-app.get('/products/:id',   (req, res) => {
-    console.log('>>>>>>>>>>>', req.params.id)
-    res.json(products)})
+app.get('/products/:id', (req, res) => {
+    const id = req.params.id;
+    console.log('>>>>>>>>>>>', id)
+    const product = products.find((product)=>product.id==id)
+    console.log('>>>>>>>>>>>', product)
+    res.json(product)
+})
 
 app.post('/',auth,(req,res)=>{
     res.send({type:"post"})
