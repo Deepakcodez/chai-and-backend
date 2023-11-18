@@ -44,6 +44,7 @@ const auth = (req, res, next) => {
 
 
 // api endpoint
+// veiw prod by id 
 app.get('/products/:id', (req, res) => {
     const id = req.params.id;
     console.log('>>>>>>>>>>>', id)
@@ -52,9 +53,16 @@ app.get('/products/:id', (req, res) => {
     res.json(product)
 })
 
+// view all products api
+app.get('/products', (req, res) => {
+    res.json(products)
+})
+
 app.post('/',auth,(req,res)=>{
     res.send({type:"post"})
 })
+
+
 app.put('/',(req,res)=>{
     res.send({type:"put"})
 })

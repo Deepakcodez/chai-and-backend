@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+      }
+      body {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        grid-auto-rows: auto;
+        gap: 30px;
+        padding: 30px;
+      }
+      .product-card {
+        font-family: Montserrat;
+      }
+      .product-card {
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 0 0 1px rgba(210, 210, 210, 0.5);
+        border-radius: 12px;
+        width: 20rem;
+      }
+      .product-card,
+      .product-card *::before,
+      .product-card *:not(.btn) {
+        transition: all 0.2s ease-in-out;
+      }
+      .product-card a {
+        text-decoration: none;
+      }
+      .product-card:hover {
+        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+      }
+      .product-card:active,
+      .product-card:focus {
+        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
+      }
+      .product-card__image {
+        position: relative;
+        display: flex;
+      }
+      .product-card__image::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          0deg,
+          rgba(104, 187, 121, 0.24) 0px,
+          rgba(104, 187, 121, 0) 24px
+        );
+        opacity: 0;
+      }
+      .product-card:hover .product-card__image::before {
+        opacity: 1;
+      }
+      .product-card__image img {
+        max-width: 100%;
+      }
+      .product-card__body {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 32px 25px 0 25px;
+        flex-grow: 1;
+      }
+      .product-card__title {
+        margin-bottom: 11px;
+        color: var(--01, #161616);
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 125%;
+      }
+      .product-card__title:hover,
+      .product-card:hover .product-card__title {
+        color: #68bb79;
+      }
+      .product-card__title:active,
+      .product-card:active .product-card__title {
+        color: #29803b;
+      }
+      .product-card__title:focus,
+      .product-card:focus .product-card__title {
+        color: #29803b;
+      }
+      .product-card__title::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .product-card__desc {
+        --lines-count: 5;
+        /* position: relative; */
+        margin-bottom: 11px;
+        color: #6d6d6d;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 120%;
+        display: -webkit-box;
+        -webkit-line-clamp: var(--lines-count);
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: calc(12px * 1.2 * var(--lines-count));
+      }
+      .product-card__stock {
+        display: flex;
+        align-items: center;
+        color: var(--02, #68bb79);
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 125%;
+        margin-top: auto;
+        margin-bottom: 10px;
+      }
+      .product-card__stock::before {
+        content: "";
+        flex: 0 0 6px;
+        height: 6px;
+        width: 6px;
+        border-radius: 50%;
+        background: var(--02, #68bb79);
+        margin-right: 8px;
+      }
+      .product-card__price {
+        margin-bottom: 12px;
+      }
+      .product-card__labels {
+        position: absolute;
+        top: 0;
+        transform: translate(0, -10px);
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        padding: 0 25px;
+      }
+      .product-card__labels .label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--03, #fff);
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1;
+        border-radius: 10px;
+        padding: 0 12px;
+        height: 2em;
+      }
+      .product-card__labels .label_hit {
+        background: var(--02, #68bb79);
+        text-transform: uppercase;
+      }
+      .product-card__labels .label_sale {
+        background: #e86b6b;
+      }
+      .product-card .price {
+        display: flex;
+        align-items: flex-end;
+      }
+      .product-card .price__current {
+        color: var(--01, #161616);
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 125%;
+      }
+      .product-card .price__old {
+        margin-left: 7px;
+        color: var(--05, #b7b7b7);
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 125%;
+        text-decoration-line: line-through;
+      }
+      .product-card__btn {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+      .product-card__btn > .btn_product {
+        position: relative;
+      }
+      .product-card:hover .product-card__btn > .btn_product {
+        --btn-start-color: #68bb79;
+        --btn-start-border: 1px solid #68bb79;
+      }
+      .btn {
+        position: relative;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        text-transform: none;
+        text-shadow: none;
+        text-decoration: none;
+        white-space: nowrap;
+        user-select: none;
+        color: var(--btn-start-color);
+        background: var(--btn-start-background);
+        border: var(--btn-start-border);
+        padding: var(--btn-start-padding);
+        height: var(--btn-height);
+        border-radius: 9999px;
+        font-family: Montserrat;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+        transition-property: color, background-color, border-color, opacity,
+          box-shadow;
+        transition-duration: var(--duration-normal);
+        transition-timing-function: ease-in-out;
+      }
+      .btn:focus {
+        outline: none;
+      }
+      .btn:hover {
+        color: var(--btn-hover-color);
+        border: var(--btn-hover-border);
+        padding: var(--btn-hover-padding);
+        background: var(--btn-hover-background);
+      }
+      .btn:active,
+      .btn:focus {
+        color: var(--btn-focus-color);
+        border: var(--btn-focus-border);
+        padding: var(--btn-focus-padding);
+        background: var(--btn-focus-background);
+      }
+      .btn_product {
+        --btn-start-color: #b7b7b7;
+        --btn-hover-color: #ffffff;
+        --btn-focus-color: #ffffff;
+        --btn-start-background: transparent;
+        --btn-hover-background: linear-gradient(
+          135deg,
+          #29803b 0%,
+          #68bb79 100%
+        );
+        --btn-focus-background: #29803b;
+        --btn-start-border: 1px solid #b7b7b7;
+        --btn-hover-border: 0;
+        --btn-focus-border: 0;
+        --btn-start-padding: 0 24px;
+        --btn-hover-padding: 0 25px;
+        --btn-focus-padding: 0 25px;
+        height: 48px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="product-card">
+      <a class="product-card__image" href="https://aharito.ru" target="_blank"
+        ><img
+          src="https://images.unsplash.com/photo-1608667508764-33cf0726b13a?crop=edges&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;w=600&amp;h=450&amp;q=80"
+          alt="Product List Card UI"
+      /></a>
+      <div class="product-card__body">
+        <a class="product-card__title" href="https://aharito.ru"
+          >Jhang Air Max sneakers</a
+        >
+        <div class="product-card__desc">
+          In this product card, the link goes on top of all the content except
+          the button. It overlaps even this text. But if the text and other
+          elements are assigned position: relative, then such elements will be
+          on the top of the link.
+        </div>
+        <div class="product-card__stock">In stock</div>
+        <div class="product-card__price price">
+          <span class="price__current">6452р</span
+          ><span class="price__old">8054р</span>
+        </div>
+        <div class="product-card__labels">
+          <span class="label label_hit">Хит</span
+          ><span class="label label_sale">Скидка -25%</span>
+        </div>
+      </div>
+      <div class="product-card__btn">
+        <button class="btn btn_product" type="button">Add to your cart</button>
+      </div>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
