@@ -18,9 +18,16 @@
 [17] db.products.find({price:{$gt:300}},{'title':1,'price':1})                                 shows only title (1) means show (0) means hide 
 
 
-update queries
+----------update queries--------
 
 [18] db.products.updateOne({'id':1},{$set:{'price':200}})                                       first parameter is location 
+[19] db.products.updateMany({'id':{$gt:3}},{$set:{'price':400}})                                for update more than one
+
+
+----------------delete Queries
+
+[20] db.products.deleteOne({'id':3})
+[21] db.products.deleteMany({'price':500})
 
 
 
