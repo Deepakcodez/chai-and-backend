@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 
 function Register() {
     const[user,setUser] = useState({
@@ -16,6 +17,32 @@ function Register() {
             ...user,
             [name]:value
         })
+
+    }
+
+    const registerHandler =()=>{
+      const {name,email,password,reEnteredPassword} = user;
+
+      if(name && email && password && password===reEnteredPassword){
+
+            axios.post('http://localhost:8000/api/v1/user/register',user, { headers: { 'Content-Type': 'application/json' }})
+            .then(resp => {
+              console.log('Response:', resp);
+              if (resp.status === 201) {
+                 alert('Registration successful');
+              } else {
+                 alert('Registration failed');
+              }
+           })
+           .catch(error => {
+              console.error('Error:', error);
+              alert('Error during registration');
+           });
+
+      }
+      else{
+        alert("invalid user details")
+      }
 
     }
 
@@ -51,7 +78,7 @@ function Register() {
 
         />
         {/* password inpit  */}
-          <input type="text" name="reEnterPassword" 
+          <input type="text" name="reEnteredPassword" 
           value={user.reEnteredPassword}
         placeholder="re-enter password"
         className="h-10 w-full px-1 rounded-md mt-3 text-black"
@@ -62,6 +89,7 @@ function Register() {
         {/* buttom  */}
         <button
         className="h-10 w-full px-1 bg-blue-800 rounded-md mt-3"
+        onClick={registerHandler}
         >Register</button>
           </div>
       </div>

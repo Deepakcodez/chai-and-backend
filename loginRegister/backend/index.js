@@ -3,12 +3,14 @@ const cors = require('cors')
 const app = express()
 const port = 8000
 const db = require('./utils/db.connection')
-db.connectDB;
+db.connectDB();
 
 
 // middlewares 
+app.use(cors());   //for connection with react
 app.use(express.json()); //parse body content
 app.use(express.urlencoded()); //parse url encoded content
+
 
 
 // routes 
