@@ -5,6 +5,15 @@ const port = 8000
 const db = require('./utils/db.connection')
 db.connectDB;
 
-app.get('/', (req, res) => res.send('Hello World!'))
+
+// middlewares 
+app.use(express.json()); //parse body content
+app.use(express.urlencoded()); //parse url encoded content
+
+
+// routes 
+const user = require('./router/user.rout')
+app.use('/api/v1/user',user)
+
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
