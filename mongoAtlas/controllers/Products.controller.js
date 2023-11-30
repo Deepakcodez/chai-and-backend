@@ -34,7 +34,7 @@ const getAllProduct = async (req, resp) => {
  })};
 
 
- // read one
+ // read one~
 const getProduct = async (req, resp) => {
   let id = req.params.id
   console.log('>>>>>>>>>>>', {id})
