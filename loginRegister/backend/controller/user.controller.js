@@ -41,7 +41,10 @@
 
         if(user){
             if(password === user.password){
-                resp.send({message:"user found"})
+                resp.send({
+                  message:"user found",
+                  user:user
+            })
             }
             else{
                 resp.send({message:"user didn't found"})

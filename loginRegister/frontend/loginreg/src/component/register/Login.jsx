@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function Login() {
+
+
+
+function Login(props) {
+  console.log('>>>>>>>>>>>e',props.msg)
+  console.log("setLoginUser type:", typeof props.setLoginUser);
+  console.log("setLoginUser value:", props.setLoginUser);
+  const navigate = useNavigate();
+
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -27,8 +36,12 @@ function Login() {
         })
         .then((resp) => {
           console.log("Response:", resp);
-
           alert(resp.data.message);
+          console.log('>>>>>>>>>>>', resp.data.user)
+          props.setLoginUser(resp.data.user)
+          console.log('>>>>>>>>>>>!', props.setLoginUser)
+          navigate("/")
+
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -38,6 +51,10 @@ function Login() {
       alert("something missing");
     }
   };
+
+  const Register=(url)=>{
+     navigate(url)
+  }
 
   return (
     <>
@@ -68,6 +85,13 @@ function Login() {
             onClick={loginHandler}
           >
             Login
+          </button>
+
+          <button
+            className="h-10 w-full px-1 bg-blue-800 rounded-md mt-3"
+            onClick={()=>{Register('/register')}}
+          >
+            Register
           </button>
         </h1>
       </div>
