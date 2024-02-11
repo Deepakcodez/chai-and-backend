@@ -19,15 +19,30 @@ var option = {
     res.sendFile(fileName,option);
 })
 
-    
+
 // socket code 
 
  io.on('connection',(socket)=>{
     console.log('>>>>>>>>>>>user connected')
 
+    
+    //custom events
+    socket.emit('myEvent', "this is data, you can also pass object")
+
+    //consuming event 
+    socket.on('eventFromClient',(data)=>{
+        console.log('>>>>>>>>>>>', data)
+    })
+
+
+
+
+
+
     socket.on('disconnect',()=>{
         console.log('>>>>>>>>>>>user disconnected')
     })
+
  })
 
 

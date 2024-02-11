@@ -11,6 +11,22 @@
 
     <script>
         let socket = io()
+
+
+        // consuming event 
+        socket.on('myEvent', (data)=>{
+            console.log('>>>>>>>>>>>', data)
+            setTimeout(() => {
+                document.write(data)
+            }, 3000);
+            
+        })
+
+        socket.emit('eventFromClient', 'message from client side')
+
+
+
+
     </script>
 </body>
 </html>
