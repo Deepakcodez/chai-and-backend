@@ -14,15 +14,32 @@
 
 
         // consuming event 
-        socket.on('myEvent', (data)=>{
-            console.log('>>>>>>>>>>>', data)
-            setTimeout(() => {
-                document.write(data)
-            }, 3000);
-            
-        })
 
-        socket.emit('eventFromClient', 'message from client side')
+        // socket.on('myEvent', (data)=>{
+        //     console.log('>>>>>>>>>>>', data)
+        //     setTimeout(() => {
+        //         document.write(data)
+        //     }, 3000);
+            
+        // })
+
+
+
+        // socket.emit('eventFromClient', 'message from client side')
+
+        // socket.on("broadcast", (data)=>{
+
+        //     console.log('>>>>>>>>>>>', data)
+        //     document.write(data)
+        // })
+
+
+
+        socket.on("newUserConnected", (data)=>{
+
+            console.log('>>>>>>>>>>>', data)
+            document.write(data)
+        })
 
 
 
