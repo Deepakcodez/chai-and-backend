@@ -12,6 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const server_1 = require("@apollo/server");
 const express4_1 = require("@apollo/server/express4");
+const dbConnection_1 = require("./utils/dbConnection");
+const schema_1 = require("./graphql/schema");
+const products_1 = require("./controllers/products");
+(0, dbConnection_1.connectDB)();
 function init() {
     return __awaiter(this, void 0, void 0, function* () {
         const app = express();
@@ -19,14 +23,11 @@ function init() {
         app.use(express.json());
         //creating graphql server
         const gqlServer = new server_1.ApolloServer({
-            typeDefs: `
-    type Query {
-                hello : String      
-    }
-    `,
+            typeDefs: schema_1.schema,
             resolvers: {
                 Query: {
-                    hello: () => `hello acknowlwdged`
+                    hello: () => `hello acknowledged`,
+                    getAllProducts: products_1.allProducts
                 }
             },
         });
