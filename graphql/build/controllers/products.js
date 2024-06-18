@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.allProducts = void 0;
+exports.getProductById = exports.allProducts = void 0;
 const product_model_js_1 = __importDefault(require("../model/product.model.js"));
 const allProducts = () => __awaiter(void 0, void 0, void 0, function* () {
     const products = yield product_model_js_1.default.find();
@@ -20,3 +20,9 @@ const allProducts = () => __awaiter(void 0, void 0, void 0, function* () {
     return products;
 });
 exports.allProducts = allProducts;
+const getProductById = (parent, arg) => __awaiter(void 0, void 0, void 0, function* () {
+    const product = yield product_model_js_1.default.findById(arg.id);
+    console.log('>>>>>>>>>>>', product);
+    return product;
+});
+exports.getProductById = getProductById;

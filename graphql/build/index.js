@@ -27,7 +27,8 @@ function init() {
             resolvers: {
                 Query: {
                     hello: () => `hello acknowledged`,
-                    getAllProducts: products_1.allProducts
+                    getAllProducts: products_1.allProducts,
+                    getSingleProduct: products_1.getProductById
                 }
             },
         });

@@ -4,7 +4,7 @@ import { expressMiddleware } from '@apollo/server/express4';
 import { connectDB } from './utils/dbConnection';
 import { schema } from './graphql/schema';
 import Product from './model/product.model';
-import { allProducts } from './controllers/products';
+import { allProducts, getProductById } from './controllers/products';
 connectDB();
 
 
@@ -22,7 +22,8 @@ const gqlServer = new ApolloServer({
     resolvers:{
         Query :{
             hello : ()=> `hello acknowledged`,
-            getAllProducts : allProducts
+            getAllProducts : allProducts,
+            getSingleProduct : getProductById
         }
     },
     

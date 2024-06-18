@@ -33,10 +33,12 @@ type Product {
   updatedAt: String!
 }
 
+
+
 type Query {
   hello: String
-  getProductById(id: ID!): Product
   getAllProducts: [Product!]!
+  getSingleProduct(id: ID!): Product
 }
 
 

@@ -5,3 +5,10 @@ export const allProducts =  async()=>{
     console.log('>>>>>>>>>>>', products);
     return products;
 }
+
+
+export const getProductById =  async(parent:any , arg : { id : string})=>{
+    const product = await Product.findById(arg.id)
+    console.log('>>>>>>>>>>>', product);
+    return product;
+}
